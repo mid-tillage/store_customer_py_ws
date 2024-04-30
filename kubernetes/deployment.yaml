@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: store-customer-py-ws-deployment
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: store-customer-py-ws
+  template:
+    metadata:
+      labels:
+        app: store-customer-py-ws
+    spec:
+      containers:
+        - name: store-customer-py-ws-container
+          image: store-customer-py-ws:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3020
+          env:        
+          - name: MONGODB_HOST
+            value: "host.docker.internal"
+          - name: MONGODB_PORT
+            value: "27017"
+          - name: MONGODB_NAME
+            value: "mydb"

@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: store-customer-py-ws-pod
+  labels:
+    app: store-customer-py-ws
+spec:
+  containers:
+  - name: store-customer-py-ws-container
+    image: store-customer-py-ws:latest
+    imagePullPolicy: IfNotPresent
+    ports:
+    - containerPort: 3020
+    env:
+    - name: MONGODB_HOST
+      value: "host.docker.internal"
+    - name: MONGODB_PORT
+      value: "27017"
+    - name: MONGODB_NAME
+      value: "mydb"
